@@ -26,11 +26,14 @@ script:
       TAG_STRING=" \
         -t ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${TRAVIS_BRANCH}"
     fi
-    docker build . --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest ${TAG_STRING}
+    - echo ${TAG_STRING}
+    - docker build . --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest ${TAG_STRING}
 
 deploy:
   provider: script
   script: bash deploy/deploy.sh
+  on:
+    all_branches: true
 
 notifications:
   email:
