@@ -32,7 +32,7 @@ script:
       BUILD_TAGS+=" -t ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest"
     fi
     echo "BUILD_TAGS are ${BUILD_TAGS}"
-  - docker build . ${CACHE} ${BUILD_TAGS} --flatten
+  - docker build . ${CACHE} ${BUILD_TAGS} --squash
 
 deploy:
   provider: script
