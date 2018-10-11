@@ -5,6 +5,7 @@ sudo: false
 env:
   global:
     - fast_finish: true
+    - DOCKER_OPTS="--experimental=true"
     - DOCKER_NAMESPACE=lansible
     - CONTAINER_NAME=sleep
 
@@ -31,7 +32,7 @@ script:
       BUILD_TAGS+=" -t ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest"
     fi
     echo "BUILD_TAGS are ${BUILD_TAGS}"
-  - docker build . ${CACHE} ${BUILD_TAGS}
+  - docker build . ${CACHE} ${BUILD_TAGS} --flatten
 
 deploy:
   provider: script
